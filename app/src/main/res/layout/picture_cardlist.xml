@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/idPicture"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="id"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/waktuMulai"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="WAktu mulai"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/waktuSelesai"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="WAktu selesai"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/waktuUpload"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="WAktu upload"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_delete_black_24dp"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
