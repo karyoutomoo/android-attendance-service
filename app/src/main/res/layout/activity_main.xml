@@ -20,7 +20,6 @@
         android:layout_height="wrap_content"
         android:text="Ambil Data Set"
         android:textAllCaps="false"/>
-
     <Button
         android:id="@+id/btnMenuPredict"
         android:layout_width="match_parent"
@@ -28,12 +27,17 @@
         android:text="Predict"
         android:textAllCaps="false"/>
     <Button
+        android:id="@+id/scanQRCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Scan QR Code"/>
+    <Button
         android:id="@+id/btnMenuTable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="See Table"
         android:textAllCaps="false"/>
-
     <Button
         android:id="@+id/btnTruncateTable"
         android:layout_width="match_parent"

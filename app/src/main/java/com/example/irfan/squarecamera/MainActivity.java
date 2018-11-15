@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected static String TAG = MainActivity.class.getSimpleName();
     protected Button btnCamerad;
     protected Button goToTable;
+    protected Button btnPredict;
     protected Button truncateTable;
+    protected Button goToScanQR;
     TextView hint;
 
     private String hintPakaiKacamata[] = new String[]{
@@ -68,9 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
         requestReadStoragePermission();
         requestWriteStoragePermission();
+
+        btnCamerad = (Button) findViewById(R.id.btnMenuDataset);
+        btnPredict=findViewById(R.id.btnMenuPredict);
+        goToTable = findViewById(R.id.btnMenuTable);
+        truncateTable = findViewById(R.id.btnTruncateTable);
+        goToScanQR = findViewById(R.id.scanQRCode);
+
         hint=findViewById(R.id.hintMain);
         hint.setText(hintPakaiKacamata[counterCount]);
-        btnCamerad = (Button) findViewById(R.id.btnMenuDataset);
         btnCamerad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,12 +87,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,250);
             }
         });
-        goToTable = findViewById(R.id.btnMenuTable);
-        truncateTable = findViewById(R.id.btnTruncateTable);
         goToTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TableActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnPredict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PredictActivity.class);
+                startActivity(intent);
+            }
+        });
+        goToScanQR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ScanActivity.class);
                 startActivity(intent);
             }
         });
