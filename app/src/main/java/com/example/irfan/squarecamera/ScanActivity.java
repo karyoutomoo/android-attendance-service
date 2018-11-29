@@ -1,15 +1,10 @@
 package com.example.irfan.squarecamera;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,14 +47,25 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                         Log.d("CLASS LAT", splitted[0]);
                         Log.d("CLASS LONG", splitted[1]);
 
-//                        longitude = location.getLongitude();
-//                        latitude = location.getLatitude();
-//                        Log.d("MY LAT", "@" + latitude);
-//                        Log.d("MY LONG", "@" + longitude);
-//                        double latDistance = Math.abs(latitude - classLat);
-//                        double longDistance = Math.abs(longitude - classLong);
-//                        if (latDistance <= 10 && longDistance <= 10) {
-//                            Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_LONG).show();
+                        GpsTracker gpsTracker = new GpsTracker(ScanActivity.this);
+                        if(gpsTracker.canGetLocation()){
+                            latitude = gpsTracker.getLatitude();
+                            longitude = gpsTracker.getLongitude();
+                            float[] results = new float[3];
+                            location.distanceBetween(latitude,longitude,classLat,classLong,results);
+                            float distance = results[0];
+                            Log.d("JARAK DARI KELAS : ", ""+distance);
+                            float maxDistance = (float) 00.1;
+                            if(distance <= maxDistance){
+                                Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
+                            }
+                            else Toast.makeText(getApplicationContext(), "ANDA TIDAK TERCATAT HADIR", Toast.LENGTH_SHORT).show();
+//                            if (latDistance <= 10 && longDistance <= 10) {
+//                                Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_LONG).show();
+//                            }else{
+//                                gpsTracker.showSettingsAlert();
+//                            }
+                        }
                     }
                 });
             }
@@ -71,8 +77,6 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
             }
         });
     }
-
-
 
     @Override
     protected void onResume() {
@@ -104,6 +108,8 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
 
         Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
     }
+
+
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
