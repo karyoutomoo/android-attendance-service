@@ -52,19 +52,26 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                             latitude = gpsTracker.getLatitude();
                             longitude = gpsTracker.getLongitude();
                             float[] results = new float[3];
+
+                            Location locationA = new Location("point A");
+                            locationA.setLatitude(latitude);
+                            locationA.setLongitude(longitude);
+
+                            Location locationB = new Location("point B");
+                            locationB.setLatitude(classLat);
+                            locationB.setLongitude(classLong);
+
+                            double jarak = locationA.distanceTo(locationB);
+                            Log.d("JARAK DARI KELAS : ", ""+jarak);
+
                             location.distanceBetween(latitude,longitude,classLat,classLong,results);
                             float distance = results[0];
-                            Log.d("JARAK DARI KELAS : ", ""+distance);
-                            float maxDistance = (float) 00.1;
+                            Log.d("DISTANCE DARI KELAS : ", ""+distance);
+                            float maxDistance = 10.00f;
                             if(distance <= maxDistance){
                                 Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
                             }
                             else Toast.makeText(getApplicationContext(), "ANDA TIDAK TERCATAT HADIR", Toast.LENGTH_SHORT).show();
-//                            if (latDistance <= 10 && longDistance <= 10) {
-//                                Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_LONG).show();
-//                            }else{
-//                                gpsTracker.showSettingsAlert();
-//                            }
                         }
                     }
                 });

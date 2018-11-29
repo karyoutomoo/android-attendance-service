@@ -21,6 +21,12 @@
         android:text="Ambil Data Set"
         android:textAllCaps="false"/>
     <Button
+        android:id="@+id/btnMenuTrain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Train"
+        android:textAllCaps="false"/>
+    <Button
         android:id="@+id/btnMenuPredict"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

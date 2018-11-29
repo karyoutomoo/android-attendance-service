@@ -61,7 +61,7 @@ public class PredictActivity extends AppCompatActivity {
     private List<String> listPathFile;
     private ArrayList<String> encodedImagesList;
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
-    protected static String UPLOAD_URL = "http://app.if.its.ac.id/sendImg";
+    protected static String UPLOAD_URL = "http://etc.if.its.ac.id/doPredict/";
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
 
@@ -253,7 +253,8 @@ public class PredictActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("nrp", nrp);
+                    params.put("idUser", nrp);
+                    params.put("password", nrp);
                     params.put("image", "data:/image/jpeg;base64," + image);
 
                     //returning parameters
