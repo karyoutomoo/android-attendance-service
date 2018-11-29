@@ -109,7 +109,6 @@ public class CameradActivity extends AppCompatActivity {
             "13. Tersenyum menoleh ke kiri 30 derajat.",
             "14. Sedih menoleh ke kiri 30 derajat.",
             "15. Mengantuk menoleh ke kiri 30 derajat.",
-
             "16. Normal tegak lurus kamera muka basah.",
             "17. Normal tegak lurus kamera tidak berkacamata muka basah.",
             "18. Tersenyum tegak lurus kamera muka basah.",

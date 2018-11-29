@@ -1,6 +1,7 @@
 package com.example.irfan.squarecamera;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +60,7 @@ public class SignInActivity extends AppCompatActivity {
     private List<String> listPathFile;
     private ArrayList<String> encodedImagesList;
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
-    protected static String UPLOAD_URL = "http://app.if.its.ac.id/sendImg";
+    protected static String UPLOAD_URL = "http://etc.if.its.ac.id/signin/";
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
 
@@ -229,7 +230,10 @@ public class SignInActivity extends AppCompatActivity {
                             requestCounter--;
                             if (requestCounter == 0 && !hasRequestFailed) {
                                 closeLoadingDialog();
-                                showSuccessDialog();
+                                //showSuccessDialog();
+                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                finish();
+                                startActivity(intent);
                             }
                         }
                     },
@@ -251,12 +255,9 @@ public class SignInActivity extends AppCompatActivity {
                     // Adding parameters
                     params.put("idUser", nrp);
                     params.put("password", "5115100007");
-                    params.put("image", "data:/image/jpeg;base64," + image);
-                    GpsTracker gpsTracker = new GpsTracker(SignInActivity.this);
-                    latitude = gpsTracker.getLatitude();
-                    longitude = gpsTracker.getLongitude();
-                    params.put("Lat", String.format(String.valueOf(latitude)));
-                    params.put("Lon", String.format(String.valueOf(longitude)));
+                    params.put("image", "data:/image/jpeg;base64," + image+".png");
+                    params.put("Lat", "-7.27952930");
+                    params.put("Lon", "112.79732590");
                     params.put("idAgenda", "IF184605_A_18");
                     //returning parameters
                     return params;

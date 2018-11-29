@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected Button truncateTable;
     protected Button goToScanQR;
     protected Button goToTrain;
+    protected Button signIn;
     TextView hint;
 
     private String hintPakaiKacamata[] = new String[]{
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         truncateTable = findViewById(R.id.btnTruncateTable);
         goToScanQR = findViewById(R.id.scanQRCode);
         goToTrain = findViewById(R.id.btnMenuTrain);
+        signIn = findViewById(R.id.signIn);
 
         hint=findViewById(R.id.hintMain);
         hint.setText(hintPakaiKacamata[counterCount]);
@@ -114,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TrainActivity.class);
+                startActivity(intent);
+            }
+        });
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });
