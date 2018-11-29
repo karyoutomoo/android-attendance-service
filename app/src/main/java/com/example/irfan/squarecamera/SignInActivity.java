@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -43,6 +44,7 @@ public class SignInActivity extends AppCompatActivity {
     long end;
     private double longitude;
     private double latitude;
+    Location location;
     String message;
     long probability;
     String validation;
@@ -160,6 +162,11 @@ public class SignInActivity extends AppCompatActivity {
 
         pakaiKacamata = this.getIntent().getBooleanExtra("pakaiKacamata", false);
         //Dialog();
+        GpsTracker gpsTracker = new GpsTracker(SignInActivity.this);
+        if(gpsTracker.canGetLocation()){
+            latitude = gpsTracker.getLatitude();
+            longitude = gpsTracker.getLongitude();
+        }
     }
 
     protected File getOutputMediaFile(int type) {
@@ -256,8 +263,8 @@ public class SignInActivity extends AppCompatActivity {
                     params.put("idUser", nrp);
                     params.put("password", "5115100007");
                     params.put("image", "data:/image/jpeg;base64," + image+".png");
-                    params.put("Lat", "-7.27952930");
-                    params.put("Lon", "112.79732590");
+                    params.put("Lat", String.valueOf(latitude));
+                    params.put("Lon", String.valueOf(longitude));
                     params.put("idAgenda", "IF184605_A_18");
                     //returning parameters
                     return params;

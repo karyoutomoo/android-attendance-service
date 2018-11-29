@@ -17,10 +17,10 @@ import com.budiyev.android.codescanner.DecodeCallback;
 
 public class ScanActivity extends AppCompatActivity implements LocationListener {
     private CodeScanner mCodeScanner;
-    private double longitude;
-    private double latitude;
     private double classLong;
     private double classLat;
+    private double longitude;
+    private double latitude;
     Location location;
     private String className;
 
