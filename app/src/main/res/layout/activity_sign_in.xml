@@ -26,14 +26,41 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:text="HINT: Penuhi frame camera dengan wajah Anda untuk akurasi maksimal"/>
+<RelativeLayout
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:id="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="NRP"/>
 
+    <EditText
+        android:id="@+id/passwrd"
+        android:inputType="textPassword"
+        android:layout_below="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+
+    <Spinner
+        android:id="@+id/agendaSpinner"
+        android:layout_toRightOf="@+id/nrp"
+        android:spinnerMode="dialog"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
     <Button
         android:id="@+id/btn_capture"
-        android:backgroundTint="@color/colorAccent"
-        android:layout_width="256dp"
+        android:backgroundTint="@color/yello"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="SIGN IN"
+        android:background="@drawable/roundedbutton"
         android:textSize="20sp"/>
 
     <TextView

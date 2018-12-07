@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     public int counterCount=0;
     protected static String TAG = MainActivity.class.getSimpleName();
-    protected Button btnCamerad;
-    protected Button goToTable;
-    protected Button btnPredict;
-    protected Button truncateTable;
-    protected Button goToScanQR;
-    protected Button goToTrain;
-    protected Button signIn;
+    protected CardView btnCamerad;
+    protected CardView goToTable;
+    protected CardView btnPredict;
+    protected CardView truncateTable;
+    protected CardView goToScanQR;
+    protected CardView goToTrain;
+    protected CardView signIn;
     TextView hint;
 
     private String hintPakaiKacamata[] = new String[]{
@@ -68,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home_activity);
 
         requestReadStoragePermission();
         requestWriteStoragePermission();
 
-        btnCamerad = (Button) findViewById(R.id.btnMenuDataset);
+        btnCamerad = findViewById(R.id.btnMenuDataset);
         btnPredict=findViewById(R.id.btnMenuPredict);
         goToTable = findViewById(R.id.btnMenuTable);
         truncateTable = findViewById(R.id.btnTruncateTable);

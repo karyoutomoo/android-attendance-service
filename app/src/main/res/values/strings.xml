@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Square Camera</string>
+    <string name="app_name">Mobile Attendance Service</string>
     <string name="title_activity_drawer_main">DrawerMainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -10,4 +10,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Agenda">
+        <item>IF184901_A_18</item>
+        <item>IF184903_A_18</item>
+        <item>IF184605_A_18</item>
+        <item>IW184301_B_18</item>
+    </string-array>
 </resources>

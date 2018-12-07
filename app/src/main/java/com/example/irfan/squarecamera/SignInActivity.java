@@ -10,7 +10,11 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +46,8 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 public class SignInActivity extends AppCompatActivity {
     long start;
     long end;
+    private String idAgenda;
+    Spinner spinner;
     private double longitude;
     private double latitude;
     Location location;
@@ -65,6 +71,8 @@ public class SignInActivity extends AppCompatActivity {
     protected static String UPLOAD_URL = "http://etc.if.its.ac.id/signin/";
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
+    EditText nrpku;
+    EditText passwrdku;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,11 +140,18 @@ public class SignInActivity extends AppCompatActivity {
         camerad = (CameraView) findViewById(R.id.camerad);
         camerad.addCameraKitListener(cameradListener);
         tvValidasi = (TextView) findViewById(R.id.tvValidasi);
+
+        nrpku = (EditText) findViewById(R.id.nrp);
+        passwrdku = findViewById(R.id.passwrd);
+
         btnCapture = (Button) findViewById(R.id.btn_capture);
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                camerad.captureImage();
+                if(nrpku.getText().toString().isEmpty() || passwrdku.getText().toString().isEmpty() || idAgenda.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Isi User dan Password anda!",Toast.LENGTH_SHORT).show();
+                }
+                else camerad.captureImage();
             }
         });
 
@@ -167,6 +182,27 @@ public class SignInActivity extends AppCompatActivity {
             latitude = gpsTracker.getLatitude();
             longitude = gpsTracker.getLongitude();
         }
+
+        spinner = (Spinner) findViewById(R.id.agendaSpinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.Agenda, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        idAgenda = parent.getItemAtPosition(pos).toString();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+        Toast.makeText(getApplicationContext(),"Pilih Kelas Anda!",Toast.LENGTH_SHORT).show();
     }
 
     protected File getOutputMediaFile(int type) {
@@ -260,12 +296,12 @@ public class SignInActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("idUser", nrp);
-                    params.put("password", "5115100007");
+                    params.put("idUser", nrpku.getText().toString());
+                    params.put("password", passwrdku.getText().toString());
                     params.put("image", "data:/image/jpeg;base64," + image+".png");
                     params.put("Lat", String.valueOf(latitude));
                     params.put("Lon", String.valueOf(longitude));
-                    params.put("idAgenda", "IF184605_A_18");
+                    params.put("idAgenda", idAgenda);
                     //returning parameters
                     return params;
                 }

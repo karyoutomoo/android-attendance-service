@@ -18,6 +18,7 @@
 
     <Button
         android:id="@+id/btnAmbilFoto"
+        android:backgroundTint="@color/yello"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mulai Ambil Foto"

@@ -1,5 +1,6 @@
 package com.example.irfan.squarecamera;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -23,6 +24,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
     private double latitude;
     Location location;
     private String className;
+    public String idAgenda;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -31,7 +33,7 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
         setContentView(R.layout.activity_scan);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
-        mCodeScanner.setCamera(CodeScanner.CAMERA_FRONT);
+        mCodeScanner.setCamera(CodeScanner.CAMERA_BACK);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(final com.google.zxing.Result result) {
@@ -67,11 +69,14 @@ public class ScanActivity extends AppCompatActivity implements LocationListener 
                             location.distanceBetween(latitude,longitude,classLat,classLong,results);
                             float distance = results[0];
                             Log.d("DISTANCE DARI KELAS : ", ""+distance);
-                            float maxDistance = 10.00f;
+                            float maxDistance = 50.00f;
                             if(distance <= maxDistance){
-                                Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "TERCATAT HADIR :"+distance, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ScanActivity.this, MainActivity.class);
+                                finish();
+                                startActivity(intent);
                             }
-                            else Toast.makeText(getApplicationContext(), "ANDA TIDAK TERCATAT HADIR", Toast.LENGTH_SHORT).show();
+                            else Toast.makeText(getApplicationContext(), "ANDA JAUH DARI KELAS : " +distance, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
