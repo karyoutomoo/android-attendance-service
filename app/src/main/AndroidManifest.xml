@@ -12,9 +12,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/launcher"
+        android:icon="@drawable/logosquare"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/round_l"
+        android:roundIcon="@drawable/logoround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
