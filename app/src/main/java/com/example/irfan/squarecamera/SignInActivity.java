@@ -148,7 +148,7 @@ public class SignInActivity extends AppCompatActivity {
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nrpku.getText().toString().isEmpty() || passwrdku.getText().toString().isEmpty() || idAgenda.isEmpty()){
+                if(nrpku.getText().toString().isEmpty() || passwrdku.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Isi User dan Password anda!",Toast.LENGTH_SHORT).show();
                 }
                 else camerad.captureImage();
@@ -197,7 +197,7 @@ public class SignInActivity extends AppCompatActivity {
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
-        idAgenda = parent.getItemAtPosition(pos).toString();
+        //idAgenda = parent.getItemAtPosition(pos).
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -301,6 +301,7 @@ public class SignInActivity extends AppCompatActivity {
                     params.put("image", "data:/image/jpeg;base64," + image+".png");
                     params.put("Lat", String.valueOf(latitude));
                     params.put("Lon", String.valueOf(longitude));
+                    idAgenda = spinner.getSelectedItem().toString();
                     params.put("idAgenda", idAgenda);
                     //returning parameters
                     return params;
