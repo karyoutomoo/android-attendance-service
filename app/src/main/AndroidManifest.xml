@@ -20,14 +20,12 @@
         tools:replace="android:icon">
         <activity android:name=".Splash">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".CameradActivity" />
         <activity android:name=".IdentityActivity" />
         <activity android:name=".TableActivity" />
@@ -35,6 +33,10 @@
         <activity android:name=".ScanActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".TrainActivity" />
+        <activity android:name=".UploadSignature" />
+        <activity android:name=".TrainSignature" />
+        <activity android:name=".PredictSignature" />
+        <activity android:name=".SignInSignature"></activity>
     </application>
 
 </manifest>

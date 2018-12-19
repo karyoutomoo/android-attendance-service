@@ -260,23 +260,15 @@ public class SignInActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
                             Log.d(TAG, "onResponse: " + response);
-//                            JSONObject obj = new JSONObject();
-//                            message = obj.optString("message");
-//                            probability = obj.optLong("probability");
-//                            validation = obj.optString("validation");
-//                            switch (message) {
-//                                case "ok":
-//                                    tvValidasi.setText("Hasil Prediksi : " + validation + "\ndengan Probability : " + probability);
-//                                default:
-//                                    tvValidasi.setText("GAGAL PREDIKSI");
-//                            }
+                            Intent intent = new Intent(getApplicationContext(), SignInSignature.class);
+                            startActivity(intent);finish();
                             requestCounter--;
                             if (requestCounter == 0 && !hasRequestFailed) {
                                 closeLoadingDialog();
                                 //showSuccessDialog();
-                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                Intent signInSignature = new Intent(SignInActivity.this, SignInSignature.class);
                                 finish();
-                                startActivity(intent);
+                                startActivity(signInSignature);
                             }
                         }
                     },

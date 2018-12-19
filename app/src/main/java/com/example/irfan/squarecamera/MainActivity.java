@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected CardView goToScanQR;
     protected CardView goToTrain;
     protected CardView signIn;
+    protected CardView  uploadSignature;
+    protected CardView  trainSignature;
+    protected CardView  predictSignature;
     TextView hint;
 
     private String hintPakaiKacamata[] = new String[]{
@@ -81,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         goToScanQR = findViewById(R.id.scanQRCode);
         goToTrain = findViewById(R.id.btnMenuTrain);
         signIn = findViewById(R.id.signIn);
+        uploadSignature = findViewById(R.id.UploadSignature);
+        predictSignature = findViewById(R.id.PredictSignature);
+        trainSignature = findViewById(R.id.btnTrainSignature);
+
 
         hint=findViewById(R.id.hintMain);
         hint.setText(hintPakaiKacamata[counterCount]);
@@ -124,6 +131,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
+            }
+        });
+        uploadSignature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, UploadSignature.class);
+                startActivity(intent);
+            }
+        });
+        predictSignature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PredictSignature.class);
+                startActivity(intent);
+            }
+        });
+        trainSignature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TrainSignature.class);
                 startActivity(intent);
             }
         });

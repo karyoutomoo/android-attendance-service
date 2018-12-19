@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_btn_bg_color"
+    tools:context=".UploadSignature">
+
+    <com.williamww.silkysignature.views.SignaturePad
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signature_pad"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginVertical="40dp"
+        android:layout_gravity="center_horizontal"
+        app:penColor="@android:color/black"
+
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="57dp" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/roundedbutton"
+        android:backgroundTint="@color/yello"
+        android:text="SEND"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="16dp">
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/yello"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:text="SAVE" />
+
+        <Button
+            android:id="@+id/compress_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/yello"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:text="COMPRESS" />
+
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/yello"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:textColor="#000000"
+            android:text="CLEAR" />
+
+    </LinearLayout>
+
+</LinearLayout>
