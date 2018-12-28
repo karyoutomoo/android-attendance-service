@@ -267,6 +267,9 @@ public class SignInActivity extends AppCompatActivity {
                                 closeLoadingDialog();
                                 //showSuccessDialog();
                                 Intent signInSignature = new Intent(SignInActivity.this, SignInSignature.class);
+                                signInSignature.putExtra("Lat",String.valueOf(latitude));
+                                signInSignature.putExtra("Lon",String.valueOf(longitude));
+                                signInSignature.putExtra("idAgenda",spinner.getSelectedItem().toString());
                                 finish();
                                 startActivity(signInSignature);
                             }

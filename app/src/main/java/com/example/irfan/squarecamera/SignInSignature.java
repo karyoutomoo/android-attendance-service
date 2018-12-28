@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.williamww.silkysignature.views.SignaturePad;
 import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class SignInSignature extends AppCompatActivity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(SignInSignature.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SignInSignature.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -232,8 +234,22 @@ public class SignInSignature extends AppCompatActivity {
                     // Adding parameters
                     params.put("idUser", nrp);
                     params.put("password", nrp);
-                    params.put("image", "data:/image/jpeg;base64," + mSignaturePad.getSignatureBitmap());
 
+                    Bitmap image;
+                    ByteArrayOutputStream baos;
+                    byte[] byteArrayImage;
+                    String image_base64;
+
+                    image = mSignaturePad.getSignatureBitmap();
+                    baos = new ByteArrayOutputStream();
+                    image.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    byteArrayImage = baos.toByteArray();
+                    image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+
+                    params.put("image", "data:/image/jpeg;base64," + image_base64+".png");
+                    params.put("Lat", getIntent().getStringExtra("Lat"));
+                    params.put("Lon", getIntent().getStringExtra("Lon"));
+                    params.put("idAgenda", getIntent().getStringExtra("idAgenda"));
                     //returning parameters
                     return params;
                 }

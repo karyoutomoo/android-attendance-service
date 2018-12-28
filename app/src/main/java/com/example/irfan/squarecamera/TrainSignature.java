@@ -48,11 +48,11 @@ public class TrainSignature extends AppCompatActivity {
         StringRequest stringRequest;
         for (int i = 0; i < 1; i++) {
             final int index = i;
-            stringRequest = new StringRequest(Request.Method.POST, "http://etc.if.its.ac.id/doTrain/",
+            stringRequest = new StringRequest(Request.Method.POST, "http://etc.if.its.ac.id/doTrain_TTD/",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(getApplicationContext(), "SIGNATURE TRAINED : " + response, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "SIGNATURE : " + response, Toast.LENGTH_LONG).show();
                             Log.d("RESP", "onResponse: "+response);
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);finish();

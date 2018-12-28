@@ -374,7 +374,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Cek Akurasi Dataset Dengan Swafoto Anda"
+                            android:text="Olah Dataset Signature Anda"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -419,7 +419,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Upload Tanda Tangan"
+                            android:text="Prediksi Tanda Tangan"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
