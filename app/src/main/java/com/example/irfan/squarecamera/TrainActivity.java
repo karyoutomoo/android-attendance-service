@@ -3,6 +3,9 @@ package com.example.irfan.squarecamera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -14,12 +17,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrainActivity extends AppCompatActivity {
+    EditText etNrp;
+    EditText etPasswrd;
+    String nrp;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train);
-        doTrain();
+        Button doTrain = findViewById(R.id.btn_train);
+        doTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etNrp = findViewById(R.id.nrp);
+                etPasswrd = findViewById(R.id.passwrd);
+                nrp = etNrp.getText().toString();
+                password = etPasswrd.getText().toString();
+
+                if (nrp != null && password != null) {
+                    doTrain();
+                }
+                else Toast.makeText(getApplicationContext(),"User atau Password belum diisi!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     protected void doTrain() {
@@ -31,7 +52,7 @@ public class TrainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
-                            Log.d("RESP", "onResponse: "+response);
+                            Log.d("RESP", "onResponse: " + response);
                         }
                     },
                     new Response.ErrorListener() {
@@ -48,8 +69,8 @@ public class TrainActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("idUser", "5115100007");
-                    params.put("password", "5115100007");
+                    params.put("idUser", nrp);
+                    params.put("password", password);
                     //returning parameters
                     return params;
                 }

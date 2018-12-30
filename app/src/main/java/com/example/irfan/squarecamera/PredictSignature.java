@@ -14,6 +14,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,10 +42,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class PredictSignature extends AppCompatActivity {
     private SignaturePad mSignaturePad;
     private Button mClearButton;
-    private Button mSaveButton;
-    private Button mCompressButton;
     private Button mSendButton;
 
+    EditText etNrp;
+    EditText etPassword;
     private static String TAG = CameradActivity.class.getSimpleName();
     private CameraView camerad;
     private CameraKitEventListener cameradListener;
@@ -56,7 +57,6 @@ public class PredictSignature extends AppCompatActivity {
     private static String BASE_DIR = "camtest/";
     private String hint[];
     private String predictionResult = "none";
-    private String nrp = "5115100007";
     private List<String> listPathFile;
     private ArrayList<String> encodedImagesList;
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
@@ -69,7 +69,6 @@ public class PredictSignature extends AppCompatActivity {
         setContentView(R.layout.activity_predict_signature);
         mSignaturePad = findViewById(R.id.signature_pad);
         mClearButton = (Button) findViewById(R.id.clear_button);
-        mSaveButton = (Button) findViewById(R.id.save_button);
         mSendButton = (Button) findViewById(R.id.btn_send);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
@@ -79,17 +78,13 @@ public class PredictSignature extends AppCompatActivity {
 
             @Override
             public void onSigned() {
-                mSaveButton.setEnabled(true);
                 mClearButton.setEnabled(true);
-                mCompressButton.setEnabled(true);
                 mSendButton.setEnabled(true);
             }
 
             @Override
             public void onClear() {
-                mSaveButton.setEnabled(false);
                 mClearButton.setEnabled(false);
-                mCompressButton.setEnabled(false);
                 mSendButton.setEnabled(false);
             }
         });
@@ -102,36 +97,13 @@ public class PredictSignature extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadSignature();
-            }
-        });
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(PredictSignature.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PredictSignature.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
-                }
-                if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(PredictSignature.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PredictSignature.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                String nrp=etNrp.getText().toString();
+                String password=etPassword.getText().toString();
+                if(nrp!=null && password !=null)
+                {
+                    uploadSignature();
+                }else Toast.makeText(getApplicationContext(),"Username atau Password belum diisi!",Toast.LENGTH_SHORT).show();
 
-        mCompressButton = (Button) findViewById(R.id.compress_button);
-        mCompressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap signatureBitmap = mSignaturePad.getCompressedSignatureBitmap(50);
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(PredictSignature.this, "50% compressed signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(PredictSignature.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }
@@ -195,7 +167,8 @@ public class PredictSignature extends AppCompatActivity {
     }
 
     protected void init() {
-        //nrp = this.getIntent().getStringExtra("nrp");
+        etNrp = findViewById(R.id.nrp);
+        etPassword = findViewById(R.id.passwrd);
         listPathFile = new ArrayList<>();
     }
 
@@ -235,8 +208,8 @@ public class PredictSignature extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("idUser", nrp);
-                    params.put("password", nrp);
+                    params.put("idUser", etNrp.getText().toString());
+                    params.put("password", etPassword.getText().toString());
 
                     ByteArrayOutputStream baos;
                     byte[] byteArrayImage;

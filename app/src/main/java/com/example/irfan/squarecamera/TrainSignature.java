@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +38,29 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TrainSignature extends AppCompatActivity {
     private SignaturePad mSignaturePad;
+    EditText etNrp;
+    EditText etPasswrd;
+    String nrp;
+    String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train);
-        doTrain();
+        Button doTrain = findViewById(R.id.btn_train);
+        doTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etNrp = findViewById(R.id.nrp);
+                etPasswrd = findViewById(R.id.passwrd);
+                nrp = etNrp.getText().toString();
+                password = etPasswrd.getText().toString();
+
+                if (nrp != null && password != null) {
+                    doTrain();
+                }
+                else Toast.makeText(getApplicationContext(),"User atau Password belum diisi!",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     protected void doTrain() {
@@ -72,8 +91,8 @@ public class TrainSignature extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("idUser", "5115100007");
-                    params.put("password", "5115100007");
+                    params.put("idUser", nrp);
+                    params.put("password", password);
                     //returning parameters
                     return params;
                 }

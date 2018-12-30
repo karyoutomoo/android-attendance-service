@@ -50,6 +50,7 @@ public class SignInActivity extends AppCompatActivity {
     Spinner spinner;
     private double longitude;
     private double latitude;
+    String RESP;
     Location location;
     String message;
     long probability;
@@ -260,6 +261,7 @@ public class SignInActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
                             Log.d(TAG, "onResponse: " + response);
+                            RESP = response;
                             Intent intent = new Intent(getApplicationContext(), SignInSignature.class);
                             startActivity(intent);finish();
                             requestCounter--;
@@ -330,8 +332,8 @@ public class SignInActivity extends AppCompatActivity {
 
     protected void showSuccessDialog() {
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Success! Hasil Prediksi : " + validation + "\ndengan Probability : " + probability)
-                .setContentText("Images uploaded successfully")
+                .setTitleText("Hasil Sign in : " )
+                .setContentText(RESP)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {

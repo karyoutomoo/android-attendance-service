@@ -41,8 +41,6 @@ public class UploadSignature extends AppCompatActivity {
 
     private SignaturePad mSignaturePad;
     private Button mClearButton;
-    private Button mSaveButton;
-    private Button mCompressButton;
     private Button mSendButton;
 
     private static String TAG = CameradActivity.class.getSimpleName();
@@ -70,7 +68,6 @@ public class UploadSignature extends AppCompatActivity {
         setContentView(R.layout.activity_upload_signature);
         mSignaturePad = findViewById(R.id.signature_pad);
         mClearButton = (Button) findViewById(R.id.clear_button);
-        mSaveButton = (Button) findViewById(R.id.save_button);
         mSendButton = (Button) findViewById(R.id.btn_send);
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
@@ -80,16 +77,14 @@ public class UploadSignature extends AppCompatActivity {
 
             @Override
             public void onSigned() {
-                mSaveButton.setEnabled(true);
                 mClearButton.setEnabled(true);
-                mCompressButton.setEnabled(true);
+                mSendButton.setEnabled(true);
             }
 
             @Override
             public void onClear() {
-                mSaveButton.setEnabled(false);
                 mClearButton.setEnabled(false);
-                mCompressButton.setEnabled(false);
+                mSendButton.setEnabled(false);
             }
         });
         mClearButton.setOnClickListener(new View.OnClickListener() {
@@ -102,35 +97,6 @@ public class UploadSignature extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uploadSignature();
-            }
-        });
-        mSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(UploadSignature.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(UploadSignature.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
-                }
-                if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(UploadSignature.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(UploadSignature.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        mCompressButton = (Button) findViewById(R.id.compress_button);
-        mCompressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap signatureBitmap = mSignaturePad.getCompressedSignatureBitmap(50);
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(UploadSignature.this, "50% compressed signature saved into the Gallery", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(UploadSignature.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
-                }
             }
         });
     }

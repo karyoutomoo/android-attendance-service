@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,17 +48,20 @@ public class PredictActivity extends AppCompatActivity {
     String message;
     long probability;
     String validation;
+    EditText etNrp;
+    EditText etPassword;
     private static String TAG = CameradActivity.class.getSimpleName();
     private CameraView camerad;
     private CameraKitEventListener cameradListener;
     private Button btnCapture;
     private TextView tvHint;
     private TextView tvValidasi;
+    String RESP;
     protected boolean pakaiKacamata;
     protected int counter = 0;
     private static String BASE_DIR = "camtest/";
     private String hint[];
-    private String nrp = "5115100007";
+    //private String nrp = "5115100007";
     private List<String> listPathFile;
     private ArrayList<String> encodedImagesList;
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
@@ -154,7 +158,8 @@ public class PredictActivity extends AppCompatActivity {
     }
 
     protected void init() {
-        //nrp = this.getIntent().getStringExtra("nrp");
+        etNrp = findViewById(R.id.nrp);
+        etPassword = findViewById(R.id.passwrd);
         listPathFile = new ArrayList<>();
         encodedImagesList = new ArrayList<>();
         tvHint = (TextView) findViewById(R.id.tvHint);
@@ -166,6 +171,7 @@ public class PredictActivity extends AppCompatActivity {
     protected File getOutputMediaFile(int type) {
 //        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
 //              Environment.DIRECTORY_PICTURES), BASE_DIR + nrp);
+        String nrp=etNrp.getText().toString();
         File folder = getFilesDir();
         File mediaStorageDir = new File(folder, BASE_DIR);
 
@@ -220,6 +226,7 @@ public class PredictActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
                             Log.d(TAG, "onResponse: "+response);
+                            RESP = response;
 //                            JSONObject obj = new JSONObject();
 //                            message = obj.optString("message");
 //                            probability = obj.optLong("probability");
@@ -251,11 +258,16 @@ public class PredictActivity extends AppCompatActivity {
                     // Get encoded Image
                     String image = encodedImagesList.get(index);
                     Map<String, String> params = new HashMap<>();
-
+                    String nrp=etNrp.getText().toString();
+                    String password=etPassword.getText().toString();
                     // Adding parameters
-                    params.put("idUser", nrp);
-                    params.put("password", nrp);
-                    params.put("image", "data:/image/jpeg;base64," + image);
+                    if(nrp!=null && password !=null){
+
+                        params.put("idUser", nrp);
+                        params.put("password", password);
+                        params.put("image", "data:/image/jpeg;base64," + image);
+                    }
+                    else Toast.makeText(getApplicationContext(),"Username atau Password belum diisi!",Toast.LENGTH_SHORT).show();
 
                     //returning parameters
                     return params;
@@ -301,8 +313,8 @@ public class PredictActivity extends AppCompatActivity {
 //                startTime, endTime, elapsedTime);
 //        //new DecimalFormat("#.##").format(timeElapsed)
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Success! Hasil Prediksi : " + validation + "\ndengan Probability : " + probability)
-                .setContentText("Images uploaded successfully")
+                .setTitleText("Success! Hasil Prediksi : ")
+                .setContentText(RESP)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {

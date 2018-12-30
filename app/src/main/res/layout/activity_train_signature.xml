@@ -5,24 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/gray_btn_bg_color"
+    android:background="#FFFFFF"
     tools:context=".UploadSignature">
 
-    <com.williamww.silkysignature.views.SignaturePad
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/signature_pad"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginVertical="40dp"
+    <EditText
+        android:layout_marginTop="300dp"
+        android:id="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:penColor="@android:color/black"
+        android:hint="NRP" />
 
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="57dp" />
+    <EditText
+        android:id="@+id/passwrd"
+        android:inputType="textPassword"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
 
     <Button
-        android:id="@+id/btn_send"
+        android:id="@+id/btn_train"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -30,17 +34,5 @@
         android:backgroundTint="@color/yello"
         android:text="TRAIN"
         android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/clear_button"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:backgroundTint="@color/yello"
-        android:enabled="false"
-        android:singleLine="true"
-        android:text="CLEAR"
-        android:textColor="#000000" />
 
 </LinearLayout>
