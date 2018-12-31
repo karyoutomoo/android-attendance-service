@@ -67,6 +67,8 @@ public class PredictSignature extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict_signature);
+        etNrp= findViewById(R.id.nrp);
+        etPassword= findViewById(R.id.passwrd);
         mSignaturePad = findViewById(R.id.signature_pad);
         mClearButton = (Button) findViewById(R.id.clear_button);
         mSendButton = (Button) findViewById(R.id.btn_send);

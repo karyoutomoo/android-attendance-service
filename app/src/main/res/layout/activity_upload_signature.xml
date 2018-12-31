@@ -44,7 +44,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/roundedbutton"
         android:backgroundTint="@color/yello"
-        android:text="Predict"
+        android:text="Upload"
         android:textSize="20sp" />
 
     <Button
